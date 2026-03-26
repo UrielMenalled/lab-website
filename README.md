@@ -53,7 +53,7 @@ Edit the CSS variables in `public/styles.css`:
 - Edge
 
 ## Long-term support
-Irregularly, I will back up this repository on Zenodo. Only use the Zenodo files if this repository are down (you won't be able to access the the following link if my repository is down, but alas, you can probably look my name up in Zenodo so something): [![DOI](https://zenodo.org/badge/latestdoi/UrielMenalled/lab-website.svg)](https://zenodo.org/badge/latestdoi/UrielMenalled/lab-website)
+Irregularly, I will back up this repository on Zenodo. Only use the Zenodo files if this repository is down (you won't be able to access the following link if my repository is down, but alas, you can probably look my name up in Zenodo or something): [![DOI](https://zenodo.org/badge/1191722480.svg)](https://doi.org/10.5281/zenodo.19242202)
 
 ## License
 
