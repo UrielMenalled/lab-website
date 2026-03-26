@@ -29,20 +29,20 @@
     <div class="container">
       <h1 class="page-title">Join Us</h1>
 
-      <section class="section">
-        <div class="content-block" style="text-align: center;">
+      <section class="section" style="margin-bottom: 0;">
+        <div class="content-block" style="text-align: center; margin-bottom: 0;">
           <h2 class="section-title">Prospective Students</h2>
           <p style="font-size: 1.2rem; margin-bottom: 1rem;">
             We are currently accepting Master's Students for Fall 2027
           </p>
-          <p style="font-style: italic; color: var(--text-light);">
+          <p style="font-size: 1.2rem; font-style: italic; color: var(--text-light);">
             Ideally reach out starting in November 2026
           </p>
         </div>
       </section>
 
-      <section class="section">
-        <div class="contact-box">
+      <section class="section" style="margin-top: 0;">
+        <div class="contact-box" style="margin: 0;">
           <h3>Interested in joining?</h3>
           <ol>
             <li>Send an email to Uriel Menalled at: <a href="mailto:uriel.menalled@montana.edu" style="color: var(--primary-green); font-weight: 600;">uriel.menalled@montana.edu</a></li>
@@ -52,89 +52,78 @@
         </div>
       </section>
 
+      <section class="section" style="text-align: center; overflow: hidden;">
+        <div style="overflow: hidden; border-radius: 12px; max-width: 100%; margin: 0 auto; position: relative;">
+          <video id="joinVideo" autoplay muted playsinline style="width: 100%; display: block; transform: scale(1.1);">
+            <source src="videos/JoinUs.mov" type="video/quicktime">
+            Your browser does not support the video tag.
+          </video>
+          <button id="replayBtn" onclick="document.getElementById('joinVideo').play(); this.style.display='none';"
+            style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); color:white; border:none; border-radius:50%; width:64px; height:64px; font-size:24px; cursor:pointer;">
+            &#9654;
+          </button>
+        </div>
+        <script>
+          document.getElementById('joinVideo').addEventListener('ended', function() {
+            document.getElementById('replayBtn').style.display = 'block';
+          });
+        </script>
+      </section>
+
       <section class="section">
         <h2 class="section-title">Lab Philosophy</h2>
 
         <div class="lab-philosophy">
           <div class="philosophy-section">
-            <h3>What We Expect From You</h3>
+            <h3>What I Expect From You</h3>
             <ul>
               <li>
-                <strong>Collaboration:</strong>
-                Be a valued team member and share your unique perspectives
+                <strong>Be a good collaborator.</strong> You are a critical and respected member of the research team. I want to hear your unique perspectives.  Just be sure to discuss any ideas with me before making changes to an established protocol.
               </li>
               <li>
-                <strong>Eagerness to learn:</strong>
-                Set goals for your experience and communicate your aspirations
+                <strong>Be eager to learn.</strong> You may not want—or have the capacity—to carve out your own research project, but I still expect you to set goals for what you want to get out of this experience.  Please communicate these goals to me—I can’t help you achieve your expectations unless I know your short-term goals and long-term aspirations.
               </li>
               <li>
-                <strong>Self-advocacy:</strong>
-                Work independently but know when to ask for help and support
+                <strong>Be a strong self-advocate. </strong> You will be expected to work with increasing independence throughout your program. However, an important part of being an independent researcher is knowing when to ask for help—whether it's extra assistance with a sampling event, guidance on a statistical analysis, or other forms of support. Please let me know how I can best assist you in meeting your needs and expectations.
               </li>
               <li>
-                <strong>Preparation:</strong>
-                Be ready to meet deadlines, especially during fieldwork season
+                <strong>Be prompt and prepared.</strong> I do my best to support a healthy work-life balance, but sometimes tasks need to be finished at specific times.  This is especially true in the summer, when we are dealing with live plants and need to coordinate experiments across multiple peoples' schedules.
               </li>
               <li>
-                <strong>Honesty:</strong>
-                Communicate openly about what's working and speak up about mistakes
+                <strong>Be honest and transparent.</strong> I am happy to adapt my mentoring style throughout the course of our time together.  To help me adapt, please let me know what is working well as well as what I can do better.  Most importantly, speak up if you make a mistake.
               </li>
               <li>
-                <strong>Flexibility:</strong>
-                Embrace the unexpected challenges that come with scientific research
+                <strong>Be flexible.</strong> Science is about venturing into the unknown and, like all adventures, it can often have some unexpected challenges.  As much as possible, try to embrace flexibility and creativity.
               </li>
               <li>
-                <strong>Respect:</strong>
-                Value diverse backgrounds and perspectives within the research community
+                <strong>Be respectful.</strong> I encourage people from all backgrounds and of all identities to join my research team.  Please be respectful that everyone comes from different backgrounds and has different perspectives—these differences are critical to building a productive and inclusive research community.
               </li>
             </ul>
           </div>
 
           <div class="philosophy-section">
-            <h3>What You Can Expect From Us</h3>
+            <h3>What You Can Expect From Me</h3>
             <ul>
               <li>
-                <strong>Respect:</strong>
-                A welcoming environment for people of all backgrounds and identities
+                <strong>Respect.</strong> I want to work with all people—that is one of the fundamental reasons I have pursued a job in education. To work effectively in diverse teams, I will strive to create an environment where everyone feels welcome. This begins with respecting you, independently of our academic endeavors.
               </li>
               <li>
-                <strong>Open-mindedness:</strong>
-                Your opinions will be valued and taken seriously
+                <strong>Open-mindedness.</strong> I want to learn from you. I will take your opinions seriously and work with you to do science together.
               </li>
               <li>
-                <strong>Availability:</strong>
-                Regular meetings to discuss progress, questions, and findings
+                <strong>Availability.</strong> To complement your independence, we will set up regular meetings to discuss your progress, questions, and findings. These meetings will help me tailor my mentorship to you.
               </li>
               <li>
-                <strong>Professional development:</strong>
-                Opportunities for conferences, teaching, and on-farm research
+                <strong>Professional development.</strong>I will try my best to present you with opportunities that will help you reach your career goals. Whether it is presenting at conferences, teaching, or doing on-farm research, I will not gate-keep opportunities.
               </li>
               <li>
-                <strong>Advocacy:</strong>
-                Support in building skills and confidence for your chosen career path
+                <strong>Advocacy.</strong> My goal is not to convert you to my disciple, but to help you build the skill set and confidence you will need to be successful as you pursue your own path to success. 
               </li>
               <li>
-                <strong>Long-term commitment:</strong>
-                Ongoing support beyond graduation for future career endeavors
+                <strong>A long-term commitment.</strong> From helping you apply to future jobs to brainstorming how you can pursue a career that best meets your desired balance of personal and professional goals, I am eager to support you in your future endeavors.
               </li>
             </ul>
           </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="content-block">
-          <h3 style="margin-bottom: 1rem;">Our Mentorship Approach</h3>
-          <p style="margin-bottom: 1rem;">
-            We believe in fostering independent researchers who can think critically and work collaboratively.
-            Our mentorship style emphasizes mutual respect, open communication, and professional growth tailored
-            to each student's goals and aspirations.
-          </p>
-          <p>
-            Whether you're interested in pursuing an academic career, working in agricultural extension, or
-            contributing to sustainable farming practices, we're committed to helping you develop the skills
-            and network you need to succeed.
-          </p>
         </div>
       </section>
     </div>
