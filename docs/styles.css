@@ -465,7 +465,9 @@ section[id] {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.25rem;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .repo-tile {
@@ -501,12 +503,7 @@ section[id] {
   }
 
   .repo-tile__language {
-    font-size: 0.75rem;
-    background: #eef2ff;
-    color: #4338ca;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-    white-space: nowrap;
+    display: none;
   }
 
   .repo-tile__desc {
