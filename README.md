@@ -41,7 +41,7 @@ Edit the CSS variables in `public/styles.css`:
 
 ### Adding New Pages
 
-1. Create a new HTML file in the `public` folder
+1. Create a new HTML file in the `docs` folder
 2. Copy the header and footer from an existing page
 3. Add a link to the new page in the navigation menu of all pages
 
