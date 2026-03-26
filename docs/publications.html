@@ -45,9 +45,146 @@
             Our publications include:
           </p>
             <!-- PUBLICATIONS_START -->
-             <li>Your existing publication here...</li>
-             <li>Another one...</li>
-             <!-- PUBLICATIONS_END -->
+      <!-- Auto-updated by GitHub Actions. Do not edit manually. -->
+      <ul id="pub-list">
+      <li class="publication-item">
+        <strong>Addressing System Constraints to Improve Organic No-till Corn Performance in Rolled-Crimped Cover Crops</strong>. (2025).
+      </li>
+      <li class="publication-item">
+        <strong>Fertility and tillage intensity affect weed community diversity and functional structure in long‐term organic systems</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>Designing and implementing a synchronized multi‐university cover crops course</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>Legacy effects of crop diversity on weed-crop competition in maize production</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>The Cover Crop Challenge: An experiential learning activity for teaching students about cover crop mixtures</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>Rolled‐crimped cover crops for organic no‐till planted winter wheat (Triticum aestivum) in the Northeast region of the United States</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>Barriers and Drivers of Organic No-till Corn and Soybean Adoption: Insights from a Nationwide Farmer Survey</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>Optimizing Weed Management and Crop Yield in Organic No-till Planted Corn Production</strong>. (2024).
+      </li>
+      <li class="publication-item">
+        <strong>High seeding rates, interrow mowing, and electrocution for weed management in organic no-till planted soybean</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Quantifying the roles of intraspecific and interspecific diversification strategies in forage cropping systems</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Phylogenetic relatedness can influence cover crop-based weed suppression</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Effect of multi‐tactic weed management on weed suppression and yield in the establishment year of intermediate wheatgrass</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Data from: Fertility and tillage intensity affect weed community diversity and functional structure in long-term organic systems</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Effective Crop Sequences for Organic No-till Field Crop Production.</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Data from" Phylogenetic relatedness can influence cover crop-based weed suppression"</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Quantifying the roles of intra-and interspecific diversification strategies in forage cropping systems</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Ecological Weed Management for Field Crop Production</strong>. (2023).
+      </li>
+      <li class="publication-item">
+        <strong>Cereal rye mulch biomass and crop density affect weed suppression and community assembly in no‐till planted soybean</strong>. (2022).
+      </li>
+      <li class="publication-item">
+        <strong>Small Grains: Unsung Hero of Crop Rotations, Challenges, and New Strategies for Organic No-till</strong>. (2022).
+      </li>
+      <li class="publication-item">
+        <strong>Crop Sequences for Organic No-till: Weed Suppression, Crop Establishment, and Crop Yields.</strong>. (2022).
+      </li>
+      <li class="publication-item">
+        <strong>Contrasting Long-Term Organic Management Systems Lead to Distinct Weed Seedbank Communities</strong>. (2022).
+      </li>
+      <li class="publication-item">
+        <strong>Data from: Cereal rye mulch biomass and crop density affect weed suppression and community assembly in no-till planted soybean: A species and trait-based analysis</strong>. (2022).
+      </li>
+      <li class="publication-item">
+        <strong>Cereal rye mulch biomass and soybean density affect weed suppression and community assembly in an organic no-till system.</strong>. (2022).
+      </li>
+      <li class="publication-item">
+        <strong>Farming system effects on biologically mediated plant–soil feedbacks</strong>. (2021).
+      </li>
+      <li class="publication-item">
+        <strong>High seeding rates and low soil nitrogen environments optimize weed suppression and profitability in organic no-till planted soybean</strong>. (2021).
+      </li>
+      <li class="publication-item">
+        <strong>Winter Wheat (Triticum aestivum L.) Tolerance to Mulch</strong>. (2021).
+      </li>
+      <li class="publication-item">
+        <strong>Soil-Mediated Effects on Weed-Crop Competition: Elucidating the Role of Annual and Perennial Intercrop Diversity Legacies</strong>. (2020).
+      </li>
+      <li class="publication-item">
+        <strong>Legacy effects of intercrop diversity and crop systems on weed-crop competition</strong>. (2020).
+      </li>
+      <li class="publication-item">
+        <strong>Soil-Mediated Effects on Weed-Crop Competition</strong>. (2019).
+      </li>
+      <li class="publication-item">
+        <strong>Effect of herbicide management practices used by invasive plant managers on Berteroa incana (hoary alyssum) seed biology and control</strong>. (2018).
+      </li>
+      <li class="publication-item">
+        <strong>Dame’s Rocket (Hesperis matronalis)</strong>. (2016).
+      </li>
+      <li class="publication-item">
+        <strong>Organic No-till Soybean Seeding Rate and Nitrogen Fertilization Effects on Weed Suppression</strong>.
+      </li>
+      <li class="publication-item">
+        <strong>Rolled-Crimped Summer-Sown Cover Crops for No-till Planted Organic Winter Wheat</strong>.
+      </li>
+      </ul>
+      <div id="pub-pagination" style="display:flex;align-items:center;gap:12px;margin-top:12px;">
+        <button id="pub-prev">&#8592; Previous</button>
+        <span id="pub-page-info"></span>
+        <button id="pub-next">Next &#8594;</button>
+      </div>
+
+      <script>
+        (function() {
+          const PER_PAGE = 10;
+          let currentPage = 1;
+
+          function renderPage(page) {
+            const items = Array.from(document.querySelectorAll('#pub-list .publication-item'));
+            const total = items.length;
+            const totalPages = Math.ceil(total / PER_PAGE);
+
+            items.forEach(function(item, i) {
+              item.style.display = (i >= (page - 1) * PER_PAGE && i < page * PER_PAGE) ? '' : 'none';
+            });
+
+            document.getElementById('pub-page-info').textContent =
+              'Page ' + page + ' of ' + totalPages;
+            document.getElementById('pub-prev').disabled = page <= 1;
+            document.getElementById('pub-next').disabled = page >= totalPages;
+            currentPage = page;
+          }
+
+          document.getElementById('pub-prev').addEventListener('click', function() {
+            renderPage(currentPage - 1);
+          });
+          document.getElementById('pub-next').addEventListener('click', function() {
+            renderPage(currentPage + 1);
+          });
+
+          renderPage(1);
+        })();
+      </script>
+      <!-- PUBLICATIONS_END -->
         </div>
       </section>
     </div>
