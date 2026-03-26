@@ -480,15 +480,10 @@ section[id] {
   }
 
   .gh-btn {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     gap: 8px;
   }
 
-  .gh-btn::after {
-    display: inline-block;
-    transform: scale(0.75); /* Adjust this value to make it smaller or larger */
-    transform-origin: center;
-  }
 }
 
 .repo-tiles {
