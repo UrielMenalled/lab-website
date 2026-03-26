@@ -31,7 +31,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add research.html
           # Only commit if index.html was actually modified
           git diff --cached --quiet || git commit -m "chore: update public repositories list [skip ci]"
           git push
