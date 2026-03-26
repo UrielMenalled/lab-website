@@ -396,6 +396,19 @@ section[id] {
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 600px) {
+    .dropdown-menu {
+        left: auto !important;
+        right: 0 !important;
+        max-width: 100vw;
+    }
+    .gh-menu {
+        left: auto !important;
+        right: 0 !important;
+        max-width: 100vw;
+    }
+}
+
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
@@ -458,6 +471,17 @@ section[id] {
   .footer {
     padding: 3rem;
     font-size: 1.1rem;
+  }
+
+  .gh-btn svg,
+  .gh-btn img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .gh-btn {
+    font-size: 1.1rem;
+    gap: 8px;
   }
 }
 
