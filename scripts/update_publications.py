@@ -100,8 +100,22 @@ def fetch_publications(author_id: str) -> list[dict]:
         req = urllib.request.Request(url, headers={"User-Agent": "LabWebsite/1.0"})
         with urllib.request.urlopen(req, timeout=30) as response:
             data = json.loads(response.read().decode())
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            print(f"ERROR: Author ID '{author_id}' not found on Semantic Scholar.")
+        elif e.code == 429:
+            print("ERROR: Rate-limited by Semantic Scholar. Try again later.")
+        else:
+            print(f"ERROR: Semantic Scholar API returned HTTP {e.code}. {e.reason}")
+        sys.exit(1)
+    except urllib.error.URLError as e:
+        print(f"ERROR: Could not connect to Semantic Scholar API. {e.reason}")
+        sys.exit(1)
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"ERROR: Invalid response from Semantic Scholar API. {e}")
+        sys.exit(1)
     except Exception as e:
-        print(f"ERROR: Could not fetch Semantic Scholar profile. {e}")
+        print(f"ERROR: Unexpected error fetching Semantic Scholar profile. {e}")
         sys.exit(1)
 
     raw_pubs = data.get("data", [])
@@ -124,7 +138,8 @@ def fetch_publications(author_id: str) -> list[dict]:
         pub_url = f"https://doi.org/{doi}" if doi else (paper.get("url") or "")
 
         volume = journal_info.get("volume") or "" if journal_info else ""
-        # Semantic Scholar does not provide issue numbers
+        # Semantic Scholar does not provide issue numbers; kept for backward
+        # compatibility with the existing publication data structure.
         number = ""
 
         entry = {
