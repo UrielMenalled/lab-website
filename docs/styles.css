@@ -540,3 +540,51 @@ section[id] {
     color: #888;
     font-style: italic;
   }
+
+  .gh-dropdown { position: relative; }
+
+  .gh-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+  .gh-btn:hover { background: rgba(0,0,0,0.06); }
+
+  .gh-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    min-width: 170px;
+    z-index: 100;
+    overflow: hidden;
+  }
+  .gh-menu.open { display: block; }
+
+  .gh-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #111;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .gh-menu a:hover { background: #f5f5f5; }
+
+  .gh-menu hr {
+    margin: 0 10px;
+    border: none;
+    border-top: 1px solid #eee;
+  }
