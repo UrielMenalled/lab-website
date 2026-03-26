@@ -460,3 +460,83 @@ section[id] {
     font-size: 1.1rem;
   }
 }
+
+.repo-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    padding: 1rem 0;
+  }
+
+  .repo-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
+  }
+
+  .repo-tile:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .repo-tile__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .repo-tile__name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1a1a2e;
+    word-break: break-word;
+  }
+
+  .repo-tile__language {
+    font-size: 0.75rem;
+    background: #eef2ff;
+    color: #4338ca;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .repo-tile__desc {
+    font-size: 0.875rem;
+    color: #555;
+    line-height: 1.45;
+    flex: 1;
+    margin: 0;
+  }
+
+  .repo-tile__no-desc {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  .repo-tile__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.25rem;
+  }
+
+  .repo-tile__stars {
+    color: #d97706;
+    font-weight: 500;
+  }
+
+  .repo-tiles__empty {
+    color: #888;
+    font-style: italic;
+  }
