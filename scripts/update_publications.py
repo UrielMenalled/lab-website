@@ -20,6 +20,7 @@ on their own lines to define where publications are injected:
     <!-- PUBLICATIONS_END -->
 """
 
+import html
 import json
 import os
 import re
@@ -83,6 +84,14 @@ def format_authors(authors: list[dict]) -> str:
     return ", ".join(parts)
 
 
+def normalize_text(value: str) -> str:
+    """Normalize text for matching/rendering by removing tags and extra spacing."""
+    text = html.unescape(value or "")
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
 def is_blocked(pub: dict) -> bool:
     """Return True if this publication should be excluded based on BLOCKED_VENUES.
     Checks venue, journal, booktitle, conference, and title fields."""
@@ -135,11 +144,13 @@ def fetch_publications(author_id: str) -> list[dict]:
 
     pubs = []
     for paper in raw_pubs:
-        title = paper.get("title") or "Untitled"
-        # Apply manual title overrides (matched by substring, case-insensitive)
+        title = normalize_text(paper.get("title") or "Untitled")
+
+        # Apply manual title overrides (matched by normalized substring, case-insensitive)
         title_lower = title.lower()
         for _key, _corrected in TITLE_OVERRIDES.items():
-            if _key.lower() in title_lower:
+            key_normalized = normalize_text(_key).lower()
+            if key_normalized in title_lower:
                 print(f"  Title override applied: {title[:60]}...")
                 title = _corrected
                 break
@@ -207,10 +218,11 @@ def render_publication_html(pub: dict) -> str:
     number  = pub.get("number", "")
 
     # Title as a DOI link if available, otherwise plain text
+    safe_title = html.escape(title)
     if url:
-        title_html = f'<a href="{url}" target="_blank" rel="noopener noreferrer">{title}</a>'
+        title_html = f'<a href="{url}" target="_blank" rel="noopener noreferrer">{safe_title}</a>'
     else:
-        title_html = title
+        title_html = safe_title
 
     # "Volume(Issue)" e.g. "2(1)", or just volume, or omitted
     vol_issue = ""
