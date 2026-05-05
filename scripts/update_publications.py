@@ -45,6 +45,15 @@ BLOCKED_VENUES = [
 START_MARKER = "<!-- PUBLICATIONS_START -->"
 END_MARKER   = "<!-- PUBLICATIONS_END -->"
 
+# Map a substring of the API-returned title (case-insensitive) to the corrected title.
+# Use this to fix truncated or malformed titles that come from Semantic Scholar.
+TITLE_OVERRIDES: dict[str, str] = {
+    "Cereal rye ( Secale cereale ) and canola ( Brassica napus ) cover crops reduce dry bean": (
+        "Cereal rye (Secale cereale) and canola (Brassica napus) cover crops reduce dry bean "
+        "(Phaseolus vulgaris) herbivore damage"
+    ),
+}
+
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
 def format_authors(authors: list[dict]) -> str:
@@ -124,6 +133,13 @@ def fetch_publications(author_id: str) -> list[dict]:
     pubs = []
     for paper in raw_pubs:
         title = paper.get("title") or "Untitled"
+        # Apply manual title overrides (matched by substring, case-insensitive)
+        title_lower = title.lower()
+        for _key, _corrected in TITLE_OVERRIDES.items():
+            if _key.lower() in title_lower:
+                print(f"  Title override applied: {title[:60]}...")
+                title = _corrected
+                break
         year = str(paper.get("year") or "")
         venue = paper.get("venue") or ""
         journal_info = paper.get("journal") or {}
