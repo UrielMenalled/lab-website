@@ -48,6 +48,9 @@ END_MARKER   = "<!-- PUBLICATIONS_END -->"
 # Map a substring of the API-returned title (case-insensitive) to the corrected title.
 # Use this to fix truncated or malformed titles that come from Semantic Scholar.
 TITLE_OVERRIDES: dict[str, str] = {
+    "Fertility and tillage intensity affect weed community diversity and functional structure in long-term organic systems.": (
+        "Fertility and tillage intensity affect weed community diversity and functional structure in long-term organic systems"
+    ),
     "Cereal rye ( Secale cereale ) and canola ( Brassica napus ) cover crops reduce dry bean": (
         "Cereal rye (Secale cereale) and canola (Brassica napus) cover crops reduce dry bean "
         "(Phaseolus vulgaris) herbivore damage"
