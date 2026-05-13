@@ -36,24 +36,39 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "files=" >> "$GITHUB_OUTPUT"
+            echo "run_all=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           files=$(git diff --name-only HEAD^ HEAD -- 'docs/images/*' \
-            | grep -E '\.(jpg|jpeg|png)$' \
-            | grep -Ev '(^|/).*-mobile\.(jpg|jpeg|png)$' \
+            | grep -E '\.(jpg|jpeg|png)
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: optimize images and generate mobile variants"
+          file_pattern: "docs/images/*"
+ \
+            | grep -Ev '(^|/).*-mobile\.(jpg|jpeg|png)
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: optimize images and generate mobile variants"
+          file_pattern: "docs/images/*"
+ \
             | tr '\n' ' ' \
-            | sed 's/[[:space:]]*$//')
+            | sed 's/[[:space:]]*$//' || true)
 
           echo "files=$files" >> "$GITHUB_OUTPUT"
+          echo "run_all=false" >> "$GITHUB_OUTPUT"
 
       - name: Optimize images and generate mobile variants
+        if: steps.changed-images.outputs.run_all == 'true' || steps.changed-images.outputs.files != ''
         shell: bash
         run: |
-          if [ -n "${{ steps.changed-images.outputs.files }}" ]; then
-            python scripts/compress_images.py ${{ steps.changed-images.outputs.files }}
-          else
+          if [ "${{ steps.changed-images.outputs.run_all }}" = "true" ]; then
             python scripts/compress_images.py
+          else
+            python scripts/compress_images.py ${{ steps.changed-images.outputs.files }}
           fi
 
       - name: Commit and push changes
