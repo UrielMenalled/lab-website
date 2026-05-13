@@ -135,7 +135,7 @@ section[id] {
   align-items: center;
   justify-content: center;
   text-align: center;
-  animation: fadeIn 0.75s ease-out forwards;
+
 }
 /* ...existing code... */
 
@@ -212,6 +212,7 @@ section[id] {
   height: 100%;
   object-fit: cover;
   display: block;
+  animation: fadeIn 0.75s ease-out forwards;
 }
 
 .span-col-1 {
@@ -462,6 +463,10 @@ section[id] {
   }
   .hero h1 {
     font-size: 4.5rem;
+  }
+
+  .gallery {
+    grid-auto-rows: 260px;
   }
 
   .site-title {
