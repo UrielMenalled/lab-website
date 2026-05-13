@@ -456,6 +456,13 @@ section[id] {
     padding: 1.5rem 3rem;
   }
 
+  .hero {
+    min-height: 90vh;
+  }
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+
   .site-title {
     font-size: 1.4rem;
   }
