@@ -41,20 +41,8 @@ jobs:
           fi
 
           files=$(git diff --name-only HEAD^ HEAD -- 'docs/images/*' \
-            | grep -E '\.(jpg|jpeg|png)
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: optimize images and generate mobile variants"
-          file_pattern: "docs/images/*"
- \
-            | grep -Ev '(^|/).*-mobile\.(jpg|jpeg|png)
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: optimize images and generate mobile variants"
-          file_pattern: "docs/images/*"
- \
+            | grep -E '\.(jpg|jpeg|png)$' \
+            | grep -Ev '(^|/).*-mobile\.(jpg|jpeg|png)$' \
             | tr '\n' ' ' \
             | sed 's/[[:space:]]*$//' || true)
 
