@@ -296,9 +296,9 @@ def build_publications_block(pubs: list[dict]) -> str:
     return (
         f"{START_MARKER}\n"
         f"      <!-- Auto-updated by GitHub Actions. Do not edit manually. -->\n"
-        f"      <ul id=\"pub-list\">\n"
+        f"      <ol id=\"pub-list\" reversed>\n"
         f"{items}\n"
-        f"      </ul>\n"
+        f"      </ol>\n"
         f"      <div id=\"pub-pagination\" style=\"display:flex;align-items:center;gap:12px;margin-top:12px;\">\n"
         f"        <button id=\"pub-prev\">&#8592; Previous</button>\n"
         f"        <span id=\"pub-page-info\"></span>\n"
