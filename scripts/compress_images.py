@@ -7,30 +7,37 @@ MAX_FILE_SIZE_KB = 500
 TARGET_WIDTH = 1920
 
 def compress_image(file_path):
-    """Resizes and compresses an image to fit within MAX_FILE_SIZE_KB, preserving rotation."""
+    """Resizes and compresses an image to fit within MAX_FILE_SIZE_KB, strictly preserving rotation and aspect ratio."""
     try:
-        img = Image.open(file_path)
-        
-        # Fix rotation using EXIF data
-        img = ImageOps.exif_transpose(img)
-        
-        # Convert to RGB if necessary (handles RGBA/PNG to JPEG conversion)
-        if img.mode in ("RGBA", "P"):
-            img = img.convert("RGB")
-        
-        # Resize if the image is larger than the target width
-        if img.width > TARGET_WIDTH:
-            ratio = TARGET_WIDTH / float(img.width)
-            new_height = int(float(img.height) * float(ratio))
-            img = img.resize((TARGET_WIDTH, new_height), Image.Resampling.LANCZOS)
-        
-        # Iteratively reduce quality until file size is under target
-        quality = 85
-        while quality > 10:
-            img.save(file_path, "JPEG", quality=quality, optimize=True)
-            if os.path.getsize(file_path) <= MAX_FILE_SIZE_KB * 1024:
-                break
-            quality -= 5
+        with Image.open(file_path) as img:
+            # 1. Fix rotation using EXIF data immediately upon opening
+            img_fixed = ImageOps.exif_transpose(img)
+            
+            # 2. Convert to RGB if necessary (handles RGBA/PNG to JPEG conversion)
+            if img_fixed.mode in ("RGBA", "P"):
+                img_fixed = img_fixed.convert("RGB")
+            
+            # 3. Resize if the image is larger than the target width while maintaining aspect ratio
+            w, h = img_fixed.size
+            if w > TARGET_WIDTH:
+                ratio = TARGET_WIDTH / float(w)
+                new_h = int(float(h) * ratio)
+                img_fixed = img_fixed.resize((TARGET_WIDTH, new_h), Image.Resampling.LANCZOS)
+            
+            # 4. Iteratively reduce quality until file size is under target
+            quality = 85
+            while quality > 10:
+                # Save to a temporary file to verify size before replacing original
+                tmp_path = file_path + ".tmp"
+                img_fixed.save(tmp_path, "JPEG", quality=quality, optimize=True)
+                
+                if os.path.getsize(tmp_path) <= MAX_FILE_SIZE_KB * 1024:
+                    os.replace(tmp_path, file_path)
+                    break
+                
+                if os.path.exists(tmp_path):
+                    os.remove(tmp_path)
+                quality -= 5
         return True
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
