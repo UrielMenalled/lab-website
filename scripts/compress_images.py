@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from PIL import Image, ImageOps
 
 # Constants
 IMAGE_DIR = "docs/images/"
@@ -7,9 +7,12 @@ MAX_FILE_SIZE_KB = 500
 TARGET_WIDTH = 1920
 
 def compress_image(file_path):
-    """Resizes and compresses an image to fit within MAX_FILE_SIZE_KB."""
+    """Resizes and compresses an image to fit within MAX_FILE_SIZE_KB, preserving rotation."""
     try:
         img = Image.open(file_path)
+        
+        # Fix rotation using EXIF data
+        img = ImageOps.exif_transpose(img)
         
         # Convert to RGB if necessary (handles RGBA/PNG to JPEG conversion)
         if img.mode in ("RGBA", "P"):
