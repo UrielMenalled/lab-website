@@ -135,6 +135,7 @@ section[id] {
   align-items: center;
   justify-content: center;
   text-align: center;
+  animation: fadeIn 0.75s ease-out forwards;
 }
 /* ...existing code... */
 
@@ -457,10 +458,10 @@ section[id] {
   }
 
   .hero {
-    min-height: 90vh;
+    min-height: 110vh;
   }
   .hero h1 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
   }
 
   .site-title {
@@ -617,3 +618,12 @@ section[id] {
     border: none;
     border-top: 1px solid #eee;
   }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
