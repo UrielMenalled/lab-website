@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageOps
+from PIL import Image
 
 # Constants
 IMAGE_DIR = "docs/images/"
@@ -7,34 +7,37 @@ MAX_FILE_SIZE_KB = 500
 TARGET_WIDTH = 1920
 
 def compress_image(file_path):
-    """Resizes and compresses an image to fit within MAX_FILE_SIZE_KB, strictly preserving rotation and aspect ratio."""
+    """Resizes and compresses an image to fit within MAX_FILE_SIZE_KB, preserving original orientation and aspect ratio."""
     try:
         with Image.open(file_path) as img:
-            # 1. Fix rotation using EXIF data immediately upon opening
-            img_fixed = ImageOps.exif_transpose(img)
-            
-            # 2. Convert to RGB if necessary (handles RGBA/PNG to JPEG conversion)
-            if img_fixed.mode in ("RGBA", "P"):
-                img_fixed = img_fixed.convert("RGB")
-            
-            # 3. Resize if the image is larger than the target width while maintaining aspect ratio
-            w, h = img_fixed.size
-            if w > TARGET_WIDTH:
-                ratio = TARGET_WIDTH / float(w)
-                new_h = int(float(h) * ratio)
-                img_fixed = img_fixed.resize((TARGET_WIDTH, new_h), Image.Resampling.LANCZOS)
-            
-            # 4. Iteratively reduce quality until file size is under target
+            # Preserve original EXIF data (including orientation) to avoid rotation changes
+            exif = img.info.get("exif", b"")
+
+            # Convert to RGB if necessary (handles RGBA/PNG to JPEG conversion)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize based on the longest dimension to handle both portrait and landscape
+            w, h = img.size
+            if max(w, h) > TARGET_WIDTH:
+                if w >= h:
+                    new_w = TARGET_WIDTH
+                    new_h = int(h * TARGET_WIDTH / w)
+                else:
+                    new_h = TARGET_WIDTH
+                    new_w = int(w * TARGET_WIDTH / h)
+                img = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+
+            # Iteratively reduce quality until file size is under target
             quality = 85
             while quality > 10:
-                # Save to a temporary file to verify size before replacing original
                 tmp_path = file_path + ".tmp"
-                img_fixed.save(tmp_path, "JPEG", quality=quality, optimize=True)
-                
+                img.save(tmp_path, "JPEG", quality=quality, optimize=True, exif=exif)
+
                 if os.path.getsize(tmp_path) <= MAX_FILE_SIZE_KB * 1024:
                     os.replace(tmp_path, file_path)
                     break
-                
+
                 if os.path.exists(tmp_path):
                     os.remove(tmp_path)
                 quality -= 5
