@@ -203,7 +203,7 @@ def fetch_publications(author_id: str) -> list[dict]:
     return pubs
 
 
-def render_publication_html(pub: dict) -> str:
+def render_publication_html(pub: dict, number: int) -> str:
     """Render a single publication as an HTML list item.
 
     Format:
@@ -215,7 +215,7 @@ def render_publication_html(pub: dict) -> str:
     year    = pub["year"]
     url     = pub["url"]
     volume  = pub.get("volume", "")
-    number  = pub.get("number", "")
+    pub_number = pub.get("number", "")
 
     # Title as a DOI link if available, otherwise plain text
     safe_title = html.escape(title)
@@ -226,8 +226,8 @@ def render_publication_html(pub: dict) -> str:
 
     # "Volume(Issue)" e.g. "2(1)", or just volume, or omitted
     vol_issue = ""
-    if volume and number:
-        vol_issue = f"{volume}({number})"
+    if volume and pub_number:
+        vol_issue = f"{volume}({pub_number})"
     elif volume:
         vol_issue = volume
 
@@ -247,7 +247,7 @@ def render_publication_html(pub: dict) -> str:
     citation_line = " ".join(parts)
 
     return (
-        f'      <li class="publication-item">\n'
+        f'      <li class="publication-item" value="{number}">\n'
         f'        {citation_line}\n'
         f'      </li>'
     )
@@ -257,8 +257,11 @@ PUBS_PER_PAGE = 10
 
 def build_publications_block(pubs: list[dict]) -> str:
     """Build the full HTML block with client-side pagination (10 per page)."""
-    items = "\n".join(render_publication_html(p) for p in pubs)
     total = len(pubs)
+    items = "\n".join(
+        render_publication_html(p, number=total - i)
+        for i, p in enumerate(pubs)
+    )
 
     pagination_js = f"""
       <script>
@@ -296,7 +299,7 @@ def build_publications_block(pubs: list[dict]) -> str:
     return (
         f"{START_MARKER}\n"
         f"      <!-- Auto-updated by GitHub Actions. Do not edit manually. -->\n"
-        f"      <ol id=\"pub-list\" reversed>\n"
+        f"      <ol id=\"pub-list\">\n"
         f"{items}\n"
         f"      </ol>\n"
         f"      <div id=\"pub-pagination\" style=\"display:flex;align-items:center;gap:12px;margin-top:12px;\">\n"
