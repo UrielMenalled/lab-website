@@ -26,5 +26,5 @@ jobs:
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: optimize images in docs/images/"
-          file_pattern: 'docs/images/*'
+          commit_message: "chore: optimize images and update picture tags [skip ci]"
+          file_pattern: 'docs/images/* docs/*.html'

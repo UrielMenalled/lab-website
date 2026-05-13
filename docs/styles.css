@@ -212,7 +212,7 @@ section[id] {
   height: 100%;
   object-fit: cover;
   display: block;
-  animation: fadeIn 0.75s ease-out forwards;
+
 }
 
 .span-col-1 {
@@ -623,12 +623,3 @@ section[id] {
     border: none;
     border-top: 1px solid #eee;
   }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
