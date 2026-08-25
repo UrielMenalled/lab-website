@@ -1,0 +1,39 @@
+{
+  "permission": {
+    "read": {
+      "*.yml": "allow",
+      "*": "allow",
+      "*/HEAD": "allow"
+    },
+    "bash": {
+      "/opt/homebrew/opt/python@3.14/bin/python3.14 *": "allow",
+      "cd *": "allow",
+      "git stash *": "allow",
+      "gh *": "allow",
+      "gh auth status *": "allow",
+      "mkdir *": "allow",
+      "python3 *": "allow",
+      "cat *": "allow",
+      "echo *": "allow",
+      "ls *": "allow",
+      "grep *": "allow",
+      "git fetch *": "allow",
+      "tail *": "allow",
+      "git log *": "allow",
+      "git revert *": "allow",
+      "git status *": "allow"
+    },
+    "executeCode": {
+      "*": "allow"
+    },
+    "edit": {
+      "*.css": "allow",
+      "*.yml": "allow",
+      "*.html": "allow",
+      "*.py": "allow",
+      "*.json": "allow",
+      "*.example": "allow",
+      "*.js": "allow"
+    }
+  }
+}

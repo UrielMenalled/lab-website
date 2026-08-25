@@ -1,0 +1,73 @@
+name: Approve Member Profile
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  process-profile:
+    if: github.event.label.name == 'approved'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Process Issue and Create Folder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: python scripts/process_member_issue.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Only ever stage brand-new member folders under
+          # people/current-members/. Never stage modifications or deletions
+          # to existing files, so this workflow can only add a new member's
+          # own folder and can never touch unrelated files.
+          new_files=$(git status --porcelain -- people/current-members/ | awk '$1 == "??" {print $2}')
+
+          if [ -z "$new_files" ]; then
+            echo "No new member folder detected; nothing to commit."
+            exit 0
+          fi
+
+          # Guard: every new path must live directly inside
+          # people/current-members/<one-folder>/...
+          for f in $new_files; do
+            case "$f" in
+              people/current-members/*/*) ;;
+              *)
+                echo "Error: unexpected new path outside a member subfolder: $f"
+                exit 1
+                ;;
+            esac
+          done
+
+          git add -- $new_files
+
+          # Final safety net: abort if anything other than additions ended up
+          # staged (e.g. an existing tracked file was modified/deleted).
+          if git diff --cached --name-status | grep -v '^A'; then
+            echo "Error: staged changes include non-addition changes. Aborting commit."
+            git reset
+            exit 1
+          fi
+
+          git commit -m "chore: auto-add approved member profile [skip ci]"
+          git push
