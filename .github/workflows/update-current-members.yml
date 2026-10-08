@@ -1,0 +1,32 @@
+name: Update Current Members
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/lab_members/current/**'
+      - 'scripts/build_current_members.py'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build current members section
+        run: python scripts/build_current_members.py
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update current members on team page [skip ci]"
+          file_pattern: 'docs/team.html'
